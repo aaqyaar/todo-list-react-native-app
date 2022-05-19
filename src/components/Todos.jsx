@@ -4,16 +4,20 @@ import { IconButton } from "react-native-paper";
 const Todos = ({ todos, onDeleteTodo }) => {
   return (
     <View style={styles.list}>
-      {todos.map((item, index) => (
-        <View style={styles.todos} key={index}>
-          <Text style={styles.todo}>{item.todo}</Text>
-          <IconButton
-            icon="delete"
-            color="purple"
-            onPress={(_id) => onDeleteTodo(item._id)}
-          />
-        </View>
-      ))}
+      {todos.length > 0 ? (
+        todos.map((item, index) => (
+          <View style={styles.todos} key={index}>
+            <Text style={styles.todo}>{item.todo}</Text>
+            <IconButton
+              icon="delete"
+              color="purple"
+              onPress={(_id) => onDeleteTodo(item._id)}
+            />
+          </View>
+        ))
+      ) : (
+        <Text style={styles.noTodosFound}>Empty No Todos Found</Text>
+      )}
     </View>
   );
 };
@@ -41,5 +45,11 @@ const styles = StyleSheet.create({
     margin: "1%",
     width: "100%",
     flexWrap: "wrap",
+  },
+  noTodosFound: {
+    fontWeight: "semibold",
+    fontSize: 20,
+    fontFamily: "sans-serif",
+    color: "red",
   },
 });
